@@ -5,10 +5,10 @@ exports.addUser = async (req, res) => {
         res.status(400).send({ status: 400, message: "[fail signup] check : input value " });
         return;
     }
-    const request = req.body;
-    const response = await userService.addUser(request);
+    const userInfo = req.body;
+    const result = await userService.addUser(userInfo);
     if (result.status == 200) {
-        const { status, msg, data } = response;
+        const { status, msg, data } = result;
         res.status(status).send({
             status,
             msg,
@@ -28,17 +28,17 @@ exports.login = async (req, res) => {
         res.status(400).send({ status: 400, message: "[fail signup] check : input value " });
         return;
     }
-    const request = req.body;
-    const response = await userService.login(request);
+    const userInfo = req.body;
+    const result = await userService.login(request);
     if (result.status == 200) {
-        const { status, msg, data } = response;
+        const { status, msg, data } = result;
         res.status(status).send({
             status,
             msg,
             data,
         });
     } else {
-        const { status, msg } = response;
+        const { status, msg } = result;
         res.status(status).send({
             status,
             msg,
