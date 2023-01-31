@@ -23,10 +23,7 @@ exports.addUser = async (userInfo) => {
             }
         })
         .catch((e) => {
-            console.log(e);
-            result.status = 500;
-            result.msg = "server error";
-            return result;
+            result.msg = 'fail query!';
         });
 
 
@@ -69,13 +66,9 @@ exports.addUser = async (userInfo) => {
                 };
             })
             .catch((e) => {
-                console.log(e);
-                result.status = 500;
-                result.msg = "server error";
-                return;
+                result.msg = 'fail query!';
             });
     }
-    console.log("result >>> ", result);
     return result;
 };
 
@@ -115,10 +108,7 @@ exports.login = async (userInfo) => {
                 return;
             }
         }).catch((e) => {
-            console.log(e);
-            result.status = 500;
-            result.msg = "server error";
-            return;
+            result.msg = 'fail query!';
         });
     return result;
 
