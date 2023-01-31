@@ -29,7 +29,7 @@ exports.addBook = async (bookInfo) => {
                 accum: bookInfo.price / 10
             };
         }).catch((error) => {
-            return result;
+            result.msg = 'fail query';
         });
     return result;
 }
@@ -61,10 +61,10 @@ exports.update = async (bookInfo) => {
                 price: data[0].price,
                 accum: data[0].accum
             };
-            return result;
         }).catch((error) => {
-            return result;
+            result.msg = 'fail query';
         });
+    return result;
 }
 
 exports.deleteBook = async (bookInfo) => {
@@ -82,8 +82,8 @@ exports.deleteBook = async (bookInfo) => {
         .then(() => {
             result.status = 200;
             result.msg = "delete book success";
-            return result;
         }).catch((error) => {
-            return result;
-        })
+            result.msg = 'fail query';
+        });
+    return result;
 }

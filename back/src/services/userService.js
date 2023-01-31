@@ -26,7 +26,6 @@ exports.addUser = async (userInfo) => {
             result.msg = 'fail query!';
         });
 
-
     if (!isIdExist) {
         // insert query
         await db.query(
@@ -105,7 +104,6 @@ exports.login = async (userInfo) => {
             } else {
                 result.status = 401;
                 result.msg = "login fail >>> please check id or password";
-                return;
             }
         }).catch((e) => {
             result.msg = 'fail query!';
