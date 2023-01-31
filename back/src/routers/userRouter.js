@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const refreshController = require('../controllers/refreshController');
+const refreshController = require('../util/refresh.util');
 
 //회원가입
 router.post("/signup", userController.addUser);

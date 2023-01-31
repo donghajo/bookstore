@@ -1,4 +1,4 @@
-const { sign, verify, refreshVerify } = require('../util/jwt.util');
+const { sign, verify, refreshVerify } = require('./jwt.util');
 const jwt = require('jsonwebtoken');
 
 exports.refresh = async (req, res) => {
