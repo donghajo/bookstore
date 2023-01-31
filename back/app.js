@@ -8,6 +8,7 @@ const cors = require('cors');
 const errorController = require('./src/controllers/errorController');
 const userRouter = require('./src/routers/userRouter');
 const adminRouter = require('./src/routers/adminRouter');
+const bookRouter = require('./src/routers/bookRouter');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +23,9 @@ app.use(methodOverride());
 app.use(express.static('uploads'));
 
 //router
-app.use('/', userRouter);
+app.use('/user', userRouter);
 app.use('/admin', adminRouter);
+app.use('/', bookRouter);
 
 //error handler
 app.use(errorController.pageNotFountError);
