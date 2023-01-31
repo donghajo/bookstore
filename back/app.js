@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const errorController = require('./src/controllers/errorController');
 const userRouter = require('./src/routers/userRouter');
+const adminRouter = require('./src/routers/adminRouter');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,9 +19,11 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride());
+app.use(express.static('uploads'));
 
 //router
 app.use('/', userRouter);
+app.use('/admin', adminRouter);
 
 //error handler
 app.use(errorController.pageNotFountError);
