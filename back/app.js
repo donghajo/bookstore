@@ -1,41 +1,32 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const methodOverride = require('method-override');
+const path = require('path');
+const app = express();
+const port = 3001;
+const cors = require('cors');
 
-var indexRouter = require('./src/routers/index');
-var usersRouter = require('./src/routers/users');
-
-var app = express();
+const errorController = require('./src/controllers/errorController');
+const userRouter = require('./src/routers/userRouter');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+//body parser
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//router
+app.use('/', userRouter);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+//error handler
+app.use(errorController.pageNotFountError);
+app.use(errorController.respondInternalError);
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+app.listen(port, function () {
+  console.log(`App is listening on port ${port} !`);
+})
