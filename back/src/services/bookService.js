@@ -18,3 +18,22 @@ exports.readBookList = async () => {
         });
     return result;
 }
+
+exports.readBook = async (bookInfo) => {
+    const result = {
+        status: 500,
+        msg: "server error",
+        data: {},
+    };
+    await db.query(
+        'select * from book where pid = ?',
+        bookInfo
+    ).then((data) => {
+        result.status = 200;
+        result.msg = 'success read book detail';
+        result.data = data[0];
+    }).catch((error) => {
+        result.msg = 'fail query';
+    });
+    return result;
+}
