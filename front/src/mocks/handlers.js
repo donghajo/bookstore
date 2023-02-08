@@ -63,6 +63,42 @@ let books = [
     "quantity": 50,
     "price": 50000,
     "accum": 5000
+  },
+  {
+    "pid": 8,
+    "title": "test2",
+    "author": "testauthor",
+    "ImageURL": "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    "quantity": 50,
+    "price": 50000,
+    "accum": 5000
+  },
+  {
+    "pid": 9,
+    "title": "test2",
+    "author": "testauthor",
+    "ImageURL": "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    "quantity": 50,
+    "price": 50000,
+    "accum": 5000
+  },
+  {
+    "pid": 10,
+    "title": "test2",
+    "author": "testauthor",
+    "ImageURL": "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    "quantity": 50,
+    "price": 50000,
+    "accum": 5000
+  },
+  {
+    "pid": 11,
+    "title": "test2",
+    "author": "testauthor",
+    "ImageURL": "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    "quantity": 50,
+    "price": 50000,
+    "accum": 5000
   }
 ];
 
