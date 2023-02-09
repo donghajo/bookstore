@@ -22,8 +22,8 @@
 # DB 설계
 ![erd](/assets/erd.png)
 
-<!-- # API 설계
+# API 설계
 ![api](/assets/apiDocument.png)
 
 # 화면
-![home](/assets/home.png) -->
+![home](/assets/home.png)
