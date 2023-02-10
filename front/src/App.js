@@ -25,9 +25,12 @@ const App = () => {
         dispatch({ type: actionTypes.SET_TOKEN, value: accessToken });
       }
     }
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      console.log("UserInfo")
+      dispatch({ type: actionTypes.LOAD_MY_INFO_REQUEST, value: JSON.parse(userInfo) });
+    }
   }, [dispatch, token, cookies]);
-
-  console.log(token);
 
   return (
     <Router>

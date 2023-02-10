@@ -134,15 +134,17 @@ const AdminPage = () => {
   };
 
   const addBoookMutation = useMutation((data) => addBookApi(data));
-
-  console.log(addFormData.title);
   const addBook = () => {
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("image", addFormData.ImageURL);
     formData.append("title", addFormData.title);
     formData.append("author", addFormData.author);
     formData.append("quantity", addFormData.quantity);
     formData.append("price", addFormData.price);
+    for (var key of formData.entries()) {
+      console.log(key[0] + ", " + key[1]);
+    }
+
     addBoookMutation.mutate(formData, {
       onSuccess: (data) => {
         console.log(data?.data);
@@ -179,7 +181,6 @@ const AdminPage = () => {
     }
   }, [bookItem]);
 
-  console.log(bookItem);
   return (
     <Base>
       <h2

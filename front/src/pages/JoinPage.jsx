@@ -120,11 +120,18 @@ const JoinPage = () => {
           type: actionTypes.SET_TOKEN,
           value: res?.data.data.accessToken,
         });
+        dispatch({
+          type: actionTypes.LOGIN_SUCCESS,
+          value: res?.data.data.accessToken,
+        });
         if (res?.statusText === "OK") {
           setToken("accessToken", res?.data.data.accessToken);
           setRefresh("refreshToken", res?.data.data.refreshToken);
-          navigate("/login");
+          navigate("/");
         }
+      },
+      onError: () => {
+        console.error("에러 발생!!");
       },
     });
   };
@@ -143,14 +150,10 @@ const JoinPage = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log("data", data);
-    console.log("fullAddress", fullAddress);
-    console.log(data.zonecode);
 
     setAddress(fullAddress);
     setZipCode(data.zonecode);
     setPopup(!popup);
-    console.log(fullAddress);
   };
 
   const handleComplete = () => {

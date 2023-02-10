@@ -120,10 +120,10 @@ const LoginPage = () => {
           type: actionTypes.SET_TOKEN,
           value: data?.data.data.accessToken,
         });
-        dispatch({
-          type: actionTypes.SET_USER,
-          value: data?.data.data.user,
-        });
+        // dispatch({
+        //   type: actionTypes.SET_USER,
+        //   value: data?.data.data.user,
+        // });
         if (data?.statusText === "OK") {
           setToken("accessToken", data?.data.data.access);
           setRefresh("refreshToken", data?.data.data.refresh);
