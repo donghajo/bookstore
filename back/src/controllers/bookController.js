@@ -37,3 +37,22 @@ exports.readBook = async (req, res) => {
         });
     }
 };
+
+exports.orderBook = async (req, res) => {
+    const result = await bookService.orderBook(req);
+    if (result.status == 200) {
+        const { status, msg, data } = result;
+        res.status(status).send({
+            status,
+            msg,
+            data,
+        });
+    } else {
+        const { status, msg } = result;
+        res.status(status).send({
+            status,
+            msg,
+        });
+    }
+
+}

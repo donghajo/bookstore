@@ -29,7 +29,7 @@ exports.login = async (req, res) => {
         return;
     }
     const userInfo = req.body;
-    const result = await userService.login(request);
+    const result = await userService.login(userInfo);
     if (result.status == 200) {
         const { status, msg, data } = result;
         res.status(status).send({
