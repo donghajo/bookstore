@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
+  addBookApi,
   adminDeleteBookApi,
   adminGetBookApi,
   adminUpdateBookApi,
@@ -132,19 +133,44 @@ const AdminPage = () => {
     }
   };
 
-  const imageInput = useRef(); // 이미지 파일 받을때
+  const addBoookMutation = useMutation((data) => addBookApi(data));
 
-  const onClickImageUpload = useCallback(() => {
-    imageInput.current.click();
-  }, [imageInput.current]);
-
-  const onChangeImages = useCallback((e) => {
-    console.log("images", e.target.files);
-    const imageFormData = new FormData(); // FormData를 사용해야 멀티파트 형식으로 서버로보내서 multer가 처리가능!!
-    [].forEach.call(e.target.files, (f) => {
-      imageFormData.append("image", f);
+  console.log(addFormData.title);
+  const addBook = () => {
+    const formData = new FormData();
+    formData.append("image", addFormData.ImageURL);
+    formData.append("title", addFormData.title);
+    formData.append("author", addFormData.author);
+    formData.append("quantity", addFormData.quantity);
+    formData.append("price", addFormData.price);
+    addBoookMutation.mutate(formData, {
+      onSuccess: (data) => {
+        console.log(data?.data);
+      },
     });
-  }, []);
+    setAddFormData({
+      title: "",
+      author: "",
+      ImageURL: "",
+      quantity: "",
+      price: "",
+    });
+    setOpen(false);
+  };
+
+  const handleValueChange = (e) => {
+    setAddFormData({
+      ...addFormData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    setAddFormData({
+      ...addFormData,
+      [e.target.name]: e.target.files[0],
+    });
+  };
 
   //goddino.tistory.com/154
   useEffect(() => {
@@ -224,17 +250,46 @@ const AdminPage = () => {
       </div>
       <Dialog open={open} onClose={handleClickOpen}>
         <DialogTitle>도서 추가</DialogTitle>
-        <DialogContent>
-          <input
+        <DialogContent style={{ display: "flex", flexDirection: "column" }}>
+          <TextField
+            label="파일업로드"
             type="file"
             accept="image/*"
-            name="image"
-            ref={imageInput}
-            onChange={onChangeImages}
+            name="ImageURL"
+            file={addFormData.ImageURL}
+            onChange={handleFileChange}
           />
-          <Button onClick={onClickImageUpload}>이미지 업로드</Button>
+          <TextField
+            label="제목"
+            type="text"
+            name="title"
+            value={addFormData.title}
+            onChange={handleValueChange}
+          />
+          <TextField
+            label="작가"
+            type="text"
+            name="author"
+            value={addFormData.author}
+            onChange={handleValueChange}
+          />
+          <TextField
+            label="수량"
+            type="text"
+            name="quantity"
+            value={addFormData.quantity}
+            onChange={handleValueChange}
+          />
+          <TextField
+            label="가격"
+            type="text"
+            name="price"
+            value={addFormData.price}
+            onChange={handleValueChange}
+          />
         </DialogContent>
         <Button onClick={handleClickOpen}>Close</Button>
+        <Button onClick={addBook}>ADD</Button>
       </Dialog>
     </Base>
   );

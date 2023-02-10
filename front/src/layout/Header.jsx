@@ -190,9 +190,9 @@ const Header = () => {
                   </Menu>
                 )}
                 <Menu>
-                  <a to="/mypage">
+                  <Link to="/mypage">
                     <SignIn>마이페이지</SignIn>
-                  </a>
+                  </Link>
                 </Menu>
                 <Menu>
                   <div onClick={logOut}>

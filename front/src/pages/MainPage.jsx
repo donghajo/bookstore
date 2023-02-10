@@ -5,6 +5,9 @@ import { Link, useLocation } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import { allBookApi } from "../apis/bookApi";
 import { useQuery } from "react-query";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -101,11 +104,21 @@ const ListContainer = styled.ol`
   padding: 0;
 `;
 const MainPage = () => {
+  const [open, setOpen] = useState(false);
   const { data: bookItem, isLoading } = useQuery("nowPlayingMovie", allBookApi);
 
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
+
+  const handleClickOpen = () => {
+    // 해당상품 장바구니로 넣는 로직 추가 필요
+    if (open === false) {
+      setOpen((prev) => !prev);
+    } else {
+      setOpen((prev) => !prev);
+    }
+  };
 
   console.log(bookItem?.data.data);
 
@@ -216,7 +229,7 @@ const MainPage = () => {
                           <div>{price}</div>
                         </ItemContent>
                         <ItemButton>
-                          <button>장바구니</button>
+                          <button onClick={handleClickOpen}>장바구니</button>
                           <button>바로구매</button>
                         </ItemButton>
                       </ListItem>
@@ -240,6 +253,15 @@ const MainPage = () => {
           </footer>
         </Main>
       </MainWrapper>
+      {/* 장바구니 담을 시 모달 창 */}
+      <Dialog open={open} onClose={handleClickOpen}>
+        <DialogTitle>
+          상품이 장바구니에 담겼습니다. <br /> 장바구니로 이동하시겠습니까?
+        </DialogTitle>
+
+        <Button onClick={handleClickOpen}>취소</Button>
+        <Button>확인</Button>
+      </Dialog>
     </Base>
   );
 };

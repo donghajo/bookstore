@@ -148,7 +148,7 @@ export const handlers = [
     }));
   }),
 
-  rest.post("http://localhost:3001/signup", async (req, res, ctx) => {
+  rest.post("http://localhost:3001/user/signup", async (req, res, ctx) => {
     try {
       return res(ctx.json({
         "status": 200,
@@ -165,7 +165,7 @@ export const handlers = [
     }
   }),
 
-  rest.post("http://localhost:3001/login", async (req, res, ctx) => {
+  rest.post("http://localhost:3001/user/login", async (req, res, ctx) => {
     try {
       if (req.body.id === "admin") {
         return res(ctx.json({
@@ -221,6 +221,67 @@ export const handlers = [
           "quantity": 50,
           "price": 50000,
           "accum": 5000
+        }
+      }));
+    } catch (error) {
+      console.error(error)
+    }
+  }),
+
+  rest.post("http://localhost:3001/admin/book", async (req, res, ctx) => {
+    try {
+      console.log(req.body)
+      return res(ctx.json({
+        "status": 200,
+        "msg": "add book success",
+        "data": {
+          "title": "test",
+          "author": "testauthor",
+          "img": "img.jpg",
+          "quantity": 50,
+          "price": 5000,
+          "accum": 500 //금액의 10% 임시
+        }
+      }));
+    } catch (error) {
+      console.error(error)
+    }
+  }),
+
+  rest.get("http://localhost:3001/user/mypage", async (req, res, ctx) => {
+    try {
+      console.log(req.body)
+      return res(ctx.json({
+        "status": 200,
+        "msg": "mypage read success",
+        "data": {
+          "user":
+          {
+            "id": "dongha",
+            "pwd": "1234",
+            "nickname": "dongha",
+            "point": 0,
+            "role": "USER"
+          }
+          ,
+          "address":
+          {
+            "pid": 3,
+            "zipcode": "47011",
+            "default_address": "부산 사상구 주례로 47 (주례동, 동서대학교)",
+            "detail_address": "상스",
+            "user_id": "dongha"
+          }
+          ,
+          "card":
+          {
+            "pid": 1,
+            "expiradate": "2027-01-01",
+            "kind": "국민은행",
+            "code": "12345689",
+            "user_id": "dongha"
+          }
+
         }
       }));
     } catch (error) {

@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage";
 import BookDetail from "./pages/BookDetail";
 import AdminPage from "./pages/admin/AdminPage";
+import Mypage from "./pages/Mypage";
 
 const App = () => {
   const [{ token }, dispatch] = useStateValue();
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/join" element={<JoinPage />} />
         <Route path="/book/:id" element={<BookDetail />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/mypage" element={<Mypage />} />
       </Routes>
       <Footer />
     </Router>

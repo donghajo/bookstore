@@ -113,7 +113,6 @@ const JoinPage = () => {
   const mutation = useMutation((signUpdata) => signUpApi(signUpdata));
 
   const signUp = () => {
-    console.log("start", signUpdata);
     mutation.mutate(signUpdata, {
       onSuccess: (res) => {
         console.log(res);
@@ -124,7 +123,7 @@ const JoinPage = () => {
         if (res?.statusText === "OK") {
           setToken("accessToken", res?.data.data.accessToken);
           setRefresh("refreshToken", res?.data.data.refreshToken);
-          navigate("/");
+          navigate("/login");
         }
       },
     });
