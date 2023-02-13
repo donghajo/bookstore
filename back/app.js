@@ -9,6 +9,7 @@ const errorController = require('./src/controllers/errorController');
 const userRouter = require('./src/routers/userRouter');
 const adminRouter = require('./src/routers/adminRouter');
 const bookRouter = require('./src/routers/bookRouter');
+const cartRouter = require('./src/routers/cartRouter');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +26,7 @@ app.use(express.static('uploads'));
 //router
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
+app.use('/cart', cartRouter);
 app.use('/', bookRouter);
 
 //error handler

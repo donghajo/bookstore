@@ -2,8 +2,8 @@ const cartSerivce = require('../services/cartService');
 const { verify } = require('../util/jwt.util');
 
 exports.readCart = async (req, res) => {
-    const cartInfo = req.params;
-    const result = await cartSerivce.readCart(cartInfo);
+    const userInfo = verify(req.headers.authorization);
+    const result = await cartSerivce.readCart(userInfo);
     if (result.status == 200) {
         const { status, msg, data } = result;
         res.status(status).send({
