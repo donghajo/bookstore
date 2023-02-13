@@ -19,7 +19,6 @@ exports.readBookList = async (req, res) => {
     }
 };
 
-
 exports.readBook = async (req, res) => {
     const bookInfo = req.params.bookid;
     const result = await bookService.readBook(bookInfo);
@@ -66,19 +65,18 @@ exports.addReview = async (req, res) => {
     const bookInfo = req.params.bookid;
     const reviewInfo = req.body;
     const result = await bookService.addReview(userInfo, bookInfo, reviewInfo);
-    if (result.status == 200) {
-        const { status, msg, data } = result;
-        res.status(status).send({
-            status,
-            msg,
-            data,
-        });
-    } else {
-        const { status, msg } = result;
-        res.status(status).send({
-            status,
-            msg,
-        });
-    }
+    res.status(result.status).send({
+        status: result.status,
+        msg: result.msg,
+    });
+};
 
+exports.deleteReview = async (req, res) => {
+    const userInfo = verify(req.headers.authorization);
+    const bookInfo = req.params.bookid;
+    const result = await bookService.deleteReview(userInfo, bookInfo);
+    res.status(result.status).send({
+        status: result.status,
+        msg: result.msg,
+    });
 };

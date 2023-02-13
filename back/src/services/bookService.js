@@ -83,7 +83,7 @@ exports.addReview = async (userInfo, bookInfo, reviewInfo) => {
 
     await db.query(
         'insert into review(user_id, book_pid, rating, comment, review_date) value(?, ?, ?, ?, ?)',
-        [userInfo.id, bookInfo.id, reviewInfo.rating, reviewInfo.comment, now]
+        [userInfo.id, bookInfo, reviewInfo.rating, reviewInfo.comment, now]
     ).then(async () => {
         result.status = 200;
         result.msg = "add review success";
@@ -93,3 +93,23 @@ exports.addReview = async (userInfo, bookInfo, reviewInfo) => {
     });
     return result;
 };
+
+
+exports.deleteReview = async (userInfo, bookInfo) => {
+    const result = {
+        status: 500,
+        msg: "server error",
+        data: {},
+    };
+    await db.query(
+        'delete from review where user_id = ? and book_pid = ?',
+        [userInfo.id, bookInfo]
+    ).then(() => {
+        result.status = 200;
+        result.msg = "delete review success";
+    }).catch((error) => {
+        console.log(error);
+        result.msg = 'fail query!';
+    });
+    return result;
+}
