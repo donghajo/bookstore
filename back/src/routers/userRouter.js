@@ -12,5 +12,8 @@ router.post("/login", userController.login);
 //토큰 재발급
 router.get("/refresh", refreshController.refresh);
 
+//마이페이지
+router.get("/mypage", userController.getMypage);
+
 
 module.exports = router;

@@ -111,3 +111,38 @@ exports.login = async (userInfo) => {
     return result;
 
 }
+
+exports.getMypage = async (userInfo) => {
+    const result = {
+        status: 500,
+        msg: "server error",
+        data: {},
+    };
+
+    await db.query(
+        'select * from user where id = ?',
+        userInfo.id
+    ).then(async (data) => {
+        const card = await db.query(
+            'select * from credit_card where user_id = ?',
+            userInfo.id
+        );
+        const address = await db.query(
+            'select * from address where user_id = ?',
+            userInfo.id
+        );
+
+        result.status = 200;
+        result.msg = 'read mypage success';
+        result.data = {
+            user: data[0][0],
+            card: card[0][0],
+            address: address[0][0]
+        };
+
+    }).catch((error) => {
+        console.log(error);
+        result.msg = 'fail query!';
+    })
+    return result;
+};
