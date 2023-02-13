@@ -1,5 +1,5 @@
 const db = require('../model/database');
-const { verify } = require('../util/jwt.util');
+
 exports.readBookList = async () => {
     const result = {
         status: 500,
@@ -14,6 +14,7 @@ exports.readBookList = async () => {
         result.data = data[0];
     })
         .catch((error) => {
+            console.log(error);
             result.msg = "fail query";
         });
     return result;
@@ -46,16 +47,12 @@ exports.readBook = async (bookInfo) => {
     return result;
 }
 
-exports.orderBook = async (req) => {
+exports.orderBook = async (userInfo, orderInfo) => {
     const result = {
         status: 500,
         msg: "server error",
         data: {},
     };
-    const now = new Date();
-    const userInfo = verify(req.headers.authorization);
-    const orderInfo = [now, req.body.amount, req.body.zipcode, req.body.default_address, req.body.detail_address, req.body.card_kind, req.body.expiradate, req.body.card_code, userInfo.id];
-
     await db.query(
         `insert into orders(order_date, amount, zipcode, default_address, detail_address, card_kind, card_expiradate, card_code, user_id) values (?,?,?,?,?,?,?,?,?)`,
         orderInfo,
@@ -69,6 +66,27 @@ exports.orderBook = async (req) => {
         result.status = 200;
         result.msg = "order success";
         result.data = order[0];
+    }).catch((error) => {
+        console.log(error);
+        result.msg = 'fail query!';
+    });
+    return result;
+};
+
+exports.addReview = async (userInfo, bookInfo, reviewInfo) => {
+    const result = {
+        status: 500,
+        msg: "server error",
+        data: {},
+    };
+    const now = new Date();
+
+    await db.query(
+        'insert into review(user_id, book_pid, rating, comment, review_date) value(?, ?, ?, ?, ?)',
+        [userInfo.id, bookInfo.id, reviewInfo.rating, reviewInfo.comment, now]
+    ).then(async () => {
+        result.status = 200;
+        result.msg = "add review success";
     }).catch((error) => {
         console.log(error);
         result.msg = 'fail query!';
