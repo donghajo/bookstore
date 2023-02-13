@@ -9,10 +9,12 @@ export const adminGetBookApi = () => axiosInstance.get("/admin/book");
 export const adminDeleteBookApi = (bookId) => axiosInstance.delete(`/admin/book/${bookId}`);
 
 export const adminUpdateBookApi = (data) => {
+    console.log(data.editFormData)
     axiosInstance.put(`/admin/book/${data.pid}`, data.editFormData);
 }
 
 export const addBookApi = (data) => {
+    console.log(data)
     const config = {
         headers: {
             "Content-Type": "multipart/form-data",

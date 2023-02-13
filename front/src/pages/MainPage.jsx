@@ -120,8 +120,6 @@ const MainPage = () => {
     }
   };
 
-  console.log(bookItem?.data.data);
-
   return (
     <Base>
       <MainWrapper>

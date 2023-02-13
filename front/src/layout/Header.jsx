@@ -129,10 +129,11 @@ const Header = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const [, , removeCookie] = useCookies(["accessToken"]);
-  const [{ token, user }, dispatch] = useStateValue();
+  const [{ token, user, role }, dispatch] = useStateValue();
 
   const logOut = () => {
     removeCookie("accessToken");
+    localStorage.removeItem("userInfo");
     dispatch({ type: actionTypes.SET_TOKEN, value: null });
     document.location.href = "/";
   };
@@ -182,7 +183,7 @@ const Header = () => {
             </SearchMenu>
             {token ? (
               <>
-                {user === "admin" && (
+                {role === "ADMIN" && (
                   <Menu>
                     <Link to="/admin">
                       <SignIn>관리자 페이지</SignIn>

@@ -161,14 +161,10 @@ const BookDetail = () => {
   const [Quantity, setQuantity] = useState(1);
   const { data: bookItem, isLoading } = useBookDetail(id);
 
+  console.log(bookItem?.data[0]);
   const onChange = (e) => {
     setQuantity(e.target.value);
   };
-
-  const year = useMemo(
-    () => bookItem?.detail.release_date.split("-")[0] || "",
-    [bookItem?.detail]
-  );
 
   console.log(Quantity);
   return (
@@ -184,39 +180,39 @@ const BookDetail = () => {
             <Main>
               <Container>
                 <Header>
-                  <Title>{bookItem.detail.title}</Title>
-                  <Author>김혜날 저자(글)</Author>
+                  <Title>{bookItem?.data[0].title}</Title>
+                  <Author>{bookItem?.data[0].author}</Author>
                 </Header>
                 <BookInfoWrapper>
                   <BookInfo>
                     <Thumbnail>
                       <ImgBox>
-                        <Img
-                          src={`https://image.tmdb.org/t/p/w300/${bookItem?.detail.poster_path}`}
-                          alt=""
-                        />
+                        <Img src={bookItem?.data[0].img} alt="" />
                       </ImgBox>
                     </Thumbnail>
                     <PriceWrapper>
                       <Item pos="">
                         <div>정가</div>
-                        <div>6,000원</div>
+                        <div>{bookItem?.data[0].price}</div>
                       </Item>
                       <Item pos="">
                         <div>판매가</div>
-                        <div>5,400원 (10%, 600원 할인)</div>
+                        <div>
+                          {bookItem?.data[0].price - bookItem?.data[0].accum}(
+                          {bookItem?.data[0].accum}원 할인)
+                        </div>
                       </Item>
-                      <Item pos="">
+                      {/* <Item pos="">
                         <div>적립/혜택</div>
                         <div>860P</div>
-                      </Item>
+                      </Item> */}
                       <Item pos="">
                         <div>배송료</div>
                         <div>무료</div>
                       </Item>
                       {/* 리뷰 별점 */}
                       <Item pos="center">
-                        <Review>
+                        {/* <Review>
                           <div>{bookItem.detail.vote_average}</div>
                           <div>
                             <Rating
@@ -227,7 +223,7 @@ const BookDetail = () => {
                             />
                           </div>
                           <span>({bookItem.detail.vote_count}개의 리뷰)</span>
-                        </Review>
+                        </Review> */}
                       </Item>
 
                       <PurchaseWrapper>
@@ -238,7 +234,13 @@ const BookDetail = () => {
                             type="number"
                             onChange={onChange}
                           />
-                          <span>총 상품금액 {Quantity * 5400}원</span>
+                          <span>
+                            총 상품금액{" "}
+                            {Quantity *
+                              (bookItem?.data[0].price -
+                                bookItem?.data[0].accum)}
+                            원
+                          </span>
                         </PurchaseController>
                         <div>
                           <Button color="register">장바구니 담기</Button>
@@ -298,11 +300,11 @@ const BookDetail = () => {
           {/* 상세 정보 */}
           <BottomInfo>
             <ContentSectionContainer>
-              <DefaultInfo
+              {/* <DefaultInfo
                 title={bookItem.detail.title}
                 year={year}
                 overview={bookItem.detail.overview}
-              />
+              /> */}
             </ContentSectionContainer>
           </BottomInfo>
         </>
