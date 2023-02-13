@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
-import { adminGetBookApi } from "../../apis/bookApi";
+import { adminGetBookApi, allBookApi } from "../../apis/bookApi";
 
 const useAdminBook = (id) => {
-    const queryFn = () => adminGetBookApi();
+    const queryFn = () => allBookApi();
     const { isLoading, isError, data } = useQuery("adminBookInfo", queryFn);
 
     return {
