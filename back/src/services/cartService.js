@@ -8,14 +8,14 @@ exports.readCart = async (userInfo) => {
     };
     await db.query(
         'select * from cart where user_id = ?',
-        userInfo
+        userInfo.id
     ).then(async (data) => {
         const cartInfo = await db.query(
-            'select * from cart_detail c left join book b on c.book_pid where pid = ? ',
-            data[0].pid);
+            'select * from cart_detail c left join book b on c.book_pid = b.pid where cart_pid = ? ',
+            data[0][0].pid);
         result.status = 200;
         result.msg = 'read cart success';
-        result.data = cartInfo;
+        result.data = cartInfo[0];
     }).catch((error) => {
         console.log(error);
         result.msg = 'fail query!';
