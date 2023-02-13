@@ -19,6 +19,8 @@ const reducer = (state = initialState, action) => {
   console.log(action);
   switch (action.type) {
     case actionTypes.SET_TOKEN:
+      const loginUserRole = jwt_decode(action.value)
+      localStorage.setItem("userInfo", JSON.stringify(loginUserRole));
       return { ...state, token: action.value };
     case actionTypes.SET_USER:
       return { ...state, user: action.value };
@@ -27,6 +29,7 @@ const reducer = (state = initialState, action) => {
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
       return { ...state, id: userInfo.id, role: userInfo.role };
     case actionTypes.LOAD_MY_INFO_REQUEST:
+      console.log(action.value)
       return { ...state, id: action.value.id, role: action.value.role };
     default:
       return state;

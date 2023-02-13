@@ -28,6 +28,7 @@ const App = () => {
     }
     const userInfo = localStorage.getItem("userInfo");
     if (userInfo) {
+      console.log(userInfo)
       console.log("UserInfo")
       dispatch({ type: actionTypes.LOAD_MY_INFO_REQUEST, value: JSON.parse(userInfo) });
     }
