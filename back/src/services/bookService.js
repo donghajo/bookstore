@@ -28,11 +28,19 @@ exports.readBook = async (bookInfo) => {
     await db.query(
         'select * from book where pid = ?',
         bookInfo
-    ).then((data) => {
+    ).then(async (data) => {
+        const review = await db.query(
+            'select * from review where book_pid = ?',
+            bookInfo
+        );
         result.status = 200;
         result.msg = 'success read book detail';
-        result.data = data[0];
+        result.data = {
+            book: data[0][0],
+            review: review[0]
+        };
     }).catch((error) => {
+        console.log(error);
         result.msg = 'fail query';
     });
     return result;
@@ -66,4 +74,4 @@ exports.orderBook = async (req) => {
         result.msg = 'fail query!';
     });
     return result;
-}
+};
