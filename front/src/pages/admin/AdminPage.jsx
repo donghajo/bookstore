@@ -19,6 +19,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { display } from "@mui/system";
+import { useCookies } from "react-cookie";
 
 const styles = (theme) => ({
   hidden: {
@@ -42,6 +43,7 @@ const AdminPage = () => {
   const [thead, setThead] = useState([]);
   const [editRowId, setEditRowId] = useState(null);
   const [open, setOpen] = useState(false);
+  const [{ accessToken }] = useCookies(["accessToken"]);
 
   // EditableRow에서 전달된 edit value state저장
   const [editFormData, setEditFormData] = useState({
@@ -145,11 +147,14 @@ const AdminPage = () => {
       console.log(key[0] + ", " + key[1]);
     }
 
-    addBoookMutation.mutate(formData, {
-      onSuccess: (data) => {
-        console.log(data?.data);
-      },
-    });
+    addBoookMutation.mutate(
+      { formData, accessToken },
+      {
+        onSuccess: (data) => {
+          console.log(data?.data);
+        },
+      }
+    );
     setAddFormData({
       title: "",
       author: "",
