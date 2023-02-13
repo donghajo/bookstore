@@ -2,6 +2,12 @@ const cartSerivce = require('../services/cartService');
 const { verify } = require('../util/jwt.util');
 
 exports.readCart = async (req, res) => {
+    if (!req.headers.authorization) {
+        res.status(400).send({
+            status: 400,
+            msg: '[fail] please login'
+        });
+    }
     const userInfo = verify(req.headers.authorization);
     const result = await cartSerivce.readCart(userInfo);
     if (result.status == 200) {
@@ -21,6 +27,12 @@ exports.readCart = async (req, res) => {
 }
 
 exports.addCart = async (req, res) => {
+    if (!req.headers.authorization) {
+        res.status(400).send({
+            status: 400,
+            msg: '[fail] please login'
+        });
+    }
     const userInfo = verify(req.headers.authorization);
     const bookInfo = {
         id: req.params,

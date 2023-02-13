@@ -39,6 +39,12 @@ exports.readBook = async (req, res) => {
 };
 
 exports.orderBook = async (req, res) => {
+    if (!req.headers.authorization) {
+        res.status(400).send({
+            status: 400,
+            msg: '[fail] please login'
+        });
+    }
     const now = new Date();
     const userInfo = verify(req.headers.authorization);
     const orderInfo = [now, req.body.amount, req.body.zipcode, req.body.default_address, req.body.detail_address, req.body.card_kind, req.body.expiradate, req.body.card_code, userInfo.id];
@@ -61,6 +67,12 @@ exports.orderBook = async (req, res) => {
 };
 
 exports.addReview = async (req, res) => {
+    if (!req.headers.authorization) {
+        res.status(400).send({
+            status: 400,
+            msg: '[fail] please login'
+        });
+    }
     const userInfo = verify(req.headers.authorization);
     const bookInfo = req.params.bookid;
     const reviewInfo = req.body;
@@ -72,6 +84,12 @@ exports.addReview = async (req, res) => {
 };
 
 exports.deleteReview = async (req, res) => {
+    if (!req.headers.authorization) {
+        res.status(400).send({
+            status: 400,
+            msg: '[fail] please login'
+        });
+    }
     const userInfo = verify(req.headers.authorization);
     const bookInfo = req.params.bookid;
     const result = await bookService.deleteReview(userInfo, bookInfo);
