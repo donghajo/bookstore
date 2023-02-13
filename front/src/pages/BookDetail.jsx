@@ -167,6 +167,7 @@ const BookDetail = () => {
   };
 
   console.log(Quantity);
+  console.log(bookItem?.data);
   return (
     <Base>
       {isLoading || !bookItem ? (
@@ -180,26 +181,27 @@ const BookDetail = () => {
             <Main>
               <Container>
                 <Header>
-                  <Title>{bookItem?.data[0].title}</Title>
-                  <Author>{bookItem?.data[0].author}</Author>
+                  <Title>{bookItem?.data?.book.title}</Title>
+                  <Author>{bookItem?.data?.book.author}</Author>
                 </Header>
                 <BookInfoWrapper>
                   <BookInfo>
                     <Thumbnail>
                       <ImgBox>
-                        <Img src={bookItem?.data[0].img} alt="" />
+                        <Img src={bookItem?.data?.book.img} alt="" />
                       </ImgBox>
                     </Thumbnail>
                     <PriceWrapper>
                       <Item pos="">
                         <div>정가</div>
-                        <div>{bookItem?.data[0].price}</div>
+                        <div>{bookItem?.data?.book.price}</div>
                       </Item>
                       <Item pos="">
                         <div>판매가</div>
                         <div>
-                          {bookItem?.data[0].price - bookItem?.data[0].accum}(
-                          {bookItem?.data[0].accum}원 할인)
+                          {bookItem?.data?.book.price -
+                            bookItem?.data?.book.accum}
+                          ({bookItem?.data?.book.accum}원 할인)
                         </div>
                       </Item>
                       {/* <Item pos="">
@@ -237,8 +239,8 @@ const BookDetail = () => {
                           <span>
                             총 상품금액{" "}
                             {Quantity *
-                              (bookItem?.data[0].price -
-                                bookItem?.data[0].accum)}
+                              (bookItem?.data?.book.price -
+                                bookItem?.data?.book.accum)}
                             원
                           </span>
                         </PurchaseController>

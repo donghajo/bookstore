@@ -61,7 +61,7 @@ const List = styled.li`
 `;
 
 const Main = styled.div`
-  width: calc(100% - 216px);
+  width: 100%;
 `;
 
 const Header = styled.div`
@@ -124,49 +124,11 @@ const MainPage = () => {
   return (
     <Base>
       <MainWrapper>
-        <Aside>
-          <SideTitle>
-            <div>베스트셀러</div>
-          </SideTitle>
-          <SideListWrapper>
-            <SideList>
-              <MainList>
-                종합 베스트
-                <SideList>
-                  <List>주간</List>
-                  <List>월간</List>
-                  <List>연간</List>
-                </SideList>
-              </MainList>
-              <MainList>
-                온라인 베스트
-                <SideList>
-                  <List>일간</List>
-                  <List>주간</List>
-                  <List>월간</List>
-                </SideList>
-              </MainList>
-              <MainList>실시간 베스트</MainList>
-              <MainList>매장별 베스트</MainList>
-              <MainList>
-                인물 베스트
-                <SideList>
-                  <List>일간</List>
-                  <List>주간</List>
-                  <List>월간</List>
-                </SideList>
-              </MainList>
-            </SideList>
-          </SideListWrapper>
-        </Aside>
         <Main>
           <Header>
             <header>
-              <h1>일간 베스트 셀러</h1>
-              <p>
-                인터넷에서 판매되는 상품의 지난 하루간 가장 많이 판매된
-                순위입니다.
-              </p>
+              <h1>판매 목록</h1>
+              <p>BOOKSTORE에서 판매되는 상품 입니다.</p>
             </header>
 
             <label>

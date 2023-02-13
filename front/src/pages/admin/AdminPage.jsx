@@ -138,7 +138,7 @@ const AdminPage = () => {
   const addBoookMutation = useMutation((data) => addBookApi(data));
   const addBook = () => {
     let formData = new FormData();
-    formData.append("image", addFormData.ImageURL);
+    formData.append("img", addFormData.ImageURL);
     formData.append("title", addFormData.title);
     formData.append("author", addFormData.author);
     formData.append("quantity", addFormData.quantity);
