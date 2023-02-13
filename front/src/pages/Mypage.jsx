@@ -25,9 +25,9 @@ const Wrapper = styled.div`
 
 const Mypage = () => {
   const [{ accessToken }] = useCookies(["accessToken"]);
-  const [userInfos, setUserInfos] = useState([]);
-  const [userAddress, setUserAddress] = useState([]);
-  const [userCard, setUserCard] = useState([]);
+  const [userInfos, setUserInfos] = useState({});
+  const [userAddress, setUserAddress] = useState({});
+  const [userCard, setUserCard] = useState({});
 
   const getMypageMutation = useMutation((token) => userInfoApi(token));
 
@@ -46,29 +46,25 @@ const Mypage = () => {
       <Navigation>
         <Wrapper>
           <h1>User Info</h1>
-          <div>nickName : {userInfos[0] && userInfos[0].nickname}</div>
-          <div>point : {userInfos[0] && userInfos[0].point}</div>
+          <div>nickName : {userInfos && userInfos.nickname}</div>
+          <div>point : {userInfos && userInfos.point}</div>
         </Wrapper>
         <Wrapper>
           <h1>Address</h1>
-          {userAddress[0] &&
-            userAddress.map((address) => (
-              <div>
-                <div>address : {address.default_address}</div>
-                <div>detailAddress : {address.detail_address}</div>
-                <div>zipcode : {address.zipcode}</div>
-              </div>
-            ))}
+
+          <div>
+            <div>address : {userAddress.default_address}</div>
+            <div>detailAddress : {userAddress.detail_address}</div>
+            <div>zipcode : {userAddress.zipcode}</div>
+          </div>
         </Wrapper>
         <Wrapper>
           <h1>Card</h1>
-          {userCard[0] &&
-            userCard.map((card) => (
-              <div>
-                <div>card : {card.kind}</div>
-                <div>code : {card.code}</div>
-              </div>
-            ))}
+
+          <div>
+            <div>card : {userCard.kind}</div>
+            <div>code : {userCard.code}</div>
+          </div>
         </Wrapper>
       </Navigation>
     </Base>

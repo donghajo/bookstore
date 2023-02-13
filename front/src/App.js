@@ -14,6 +14,7 @@ import JoinPage from "./pages/JoinPage";
 import BookDetail from "./pages/BookDetail";
 import AdminPage from "./pages/admin/AdminPage";
 import Mypage from "./pages/Mypage";
+import OrderPage from "./pages/OrderPage";
 
 const App = () => {
   const [{ token }, dispatch] = useStateValue();
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/book/:id" element={<BookDetail />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/order" element={<OrderPage />} />
       </Routes>
       <Footer />
     </Router>

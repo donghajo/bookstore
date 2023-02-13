@@ -23,3 +23,13 @@ export const addBookApi = (data) => {
     };
     return axiosInstance.post("/admin/book", data, config);
 };
+
+export const getOrderApi = (token) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    config.headers["authorization"] = token;
+    return axiosInstance.get("/cart", config)
+}

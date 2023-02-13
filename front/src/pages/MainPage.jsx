@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaRegCheckCircle } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import { allBookApi } from "../apis/bookApi";
 import { useQuery } from "react-query";
@@ -107,6 +107,7 @@ const MainPage = () => {
   const [open, setOpen] = useState(false);
   const { data: bookItem, isLoading } = useQuery("nowPlayingMovie", allBookApi);
 
+  const navigate = useNavigate();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
@@ -258,7 +259,7 @@ const MainPage = () => {
         </DialogTitle>
 
         <Button onClick={handleClickOpen}>취소</Button>
-        <Button>확인</Button>
+        <Button onClick={() => navigate("/order")}>확인</Button>
       </Dialog>
     </Base>
   );
