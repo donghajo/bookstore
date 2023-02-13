@@ -99,7 +99,7 @@ const LoginPage = () => {
   const [{}, dispatch] = useStateValue();
   const [loginUpdata, setLoginUpdate] = useState({
     id: "",
-    password: "",
+    pwd: "",
   });
 
   const onChange = (e) => {
@@ -125,8 +125,8 @@ const LoginPage = () => {
         //   value: data?.data.data.user,
         // });
         if (data?.statusText === "OK") {
-          setToken("accessToken", data?.data.data.access);
-          setRefresh("refreshToken", data?.data.data.refresh);
+          setToken("accessToken", data?.data.data.accessToken);
+          setRefresh("refreshToken", data?.data.data.refreshToken);
           navigate("/");
         }
       },
@@ -155,7 +155,7 @@ const LoginPage = () => {
             <Input
               type="text"
               Pos="bottom"
-              name="password"
+              name="pwd"
               placeholder="비밀번호를 입력해 주세요."
               onChange={onChange}
             />
