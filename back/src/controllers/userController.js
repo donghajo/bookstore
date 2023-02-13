@@ -50,6 +50,12 @@ exports.login = async (req, res) => {
 };
 
 exports.getMypage = async (req, res) => {
+    if (!req.headers.authorization) {
+        res.status(400).send({
+            status: 400,
+            msg: '[fail] please login'
+        });
+    }
     const userInfo = verify(req.headers.authorization);
     const result = await userService.getMypage(userInfo);
     if (result.status == 200) {
